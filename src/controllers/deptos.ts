@@ -4,7 +4,6 @@ import ISearchQuery from '../interfaces/SearchDeptoQuery'
 import Depto from '../models/Depto'
 import * as searchHelper from '../helpers/search'
 import {Types} from 'mongoose'
-import moment, { Moment } from 'moment'
 
 export const getDeptos=async (req:Request,res:Response,next:NextFunction)=>{
     let totalItems:Number
@@ -44,7 +43,7 @@ export const searchDeptos=(req:Request,res:Response,next:NextFunction)=>{
     // Landing query params
     let dateQuery:any={}
     let additionalLandingQuery={}
-    console.log('landing search',data.landingSearch)
+    // console.log('landing search',data.landingSearch)
     if(data.landingSearch){
         const inputStartDate=new Date(data.landingSearch.startDate)
         const inputEndDate=new Date(data.landingSearch.endDate)
@@ -92,7 +91,7 @@ export const searchDeptos=(req:Request,res:Response,next:NextFunction)=>{
         .skip((page-1)*ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
     })
     .then(deptos=>{
-        console.log(deptos)
+        // console.log(deptos)
         return res.json({deptos:deptos,totalSearchedDeptos:nrDeptosFound})
     })
     .catch(err=>{
@@ -151,7 +150,7 @@ export const getDepto=async(req:Request,res:Response,next:NextFunction)=>{
     // .populate({path:'reservations',populate:'user'})
     // console.log(fetchedDepto)
     let deptoAndReviews=fetchedDeptoAndReview[0]
-    console.log(deptoAndReviews)
+    // console.log(deptoAndReviews)
     return res.json(
         {
             message:"Depto fetched succesfully",
